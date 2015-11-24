@@ -1,0 +1,25 @@
+!!! 5
+%html
+%head
+	%title Recipe Box
+	= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+	= javascript_include_tag 'application', 'data-turbolinks-track' => true
+	= csrf_meta_tags
+
+%body
+	%nav.navbar.navbar-default
+		.container
+			.navbar-brand= link_to "Recipe Box", root_path
+
+			%ul.nav.navbar-nav.navbar-right
+				%li= link_to "New Recipe", new_recipe_path
+				%li= link_to "Sign Out", root_path
+
+	.container
+		- flash.each do |key, value|
+			%div{class: "alert alert-#{key} alert-dismissible", role: "alert"}
+				%button.close{ type: "button", "data-dismiss": "alert", "aria-label": "Close" }
+					%span{'aria-hidden': 'true'} &times;
+				= value
+		= yield
+  
